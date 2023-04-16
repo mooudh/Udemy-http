@@ -1,21 +1,27 @@
 <template>
   <li>
     <p>
-      <span class="highlight">{{ name }}</span> rated the learning experience
-      <span :class="ratingClass">{{ rating }}</span>.
+      <span class="highlight">{{ props.name }}</span> rated the learning
+      experience <span :class="ratingClass">{{ props.rating }}</span
+      >.
     </p>
   </li>
 </template>
 
-<script>
-export default {
-  props: ['name', 'rating'],
-  computed: {
-    ratingClass() {
-      return 'highlight rating--' + this.rating;
-    },
+<script setup>
+import { computed } from 'vue';
+const props = defineProps({
+  name: {
+    type: String,
   },
-};
+  rating: {
+    type: String,
+  },
+});
+
+const ratingClass = computed(() => {
+  return 'highlight rating--' + props.rating;
+});
 </script>
 
 <style scoped>
