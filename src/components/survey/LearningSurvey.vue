@@ -68,8 +68,8 @@ const submitSurvey = () => {
     rating: chosenRating.value,
   });
 
-  enteredName = '';
-  chosenRating = null;
+  enteredName.value = '';
+  chosenRating.value = null;
 };
 </script>
 
