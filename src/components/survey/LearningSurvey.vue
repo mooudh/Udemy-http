@@ -54,7 +54,7 @@ import { ref } from 'vue';
 let enteredName = ref('');
 let chosenRating = ref(null);
 const invalidInput = ref(false);
-const emit = defineEmits(['survey-submit']);
+// const emit = defineEmits(['survey-submit']);
 
 const submitSurvey = () => {
   if (enteredName.value === '' || !chosenRating.value) {
@@ -63,10 +63,24 @@ const submitSurvey = () => {
   }
   invalidInput.value = false;
 
-  emit('survey-submit', {
-    userName: enteredName.value,
-    rating: chosenRating.value,
-  });
+  // emit('survey-submit', {
+  //   userName: enteredName.value,
+  //   rating: chosenRating.value,
+  // });
+
+  fetch(
+    'https://maximilian-http-ef182-default-rtdb.firebaseio.com/survey.json',
+    {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        userName: enteredName.value,
+        rating: chosenRating.value,
+      }),
+    }
+  );
 
   enteredName.value = '';
   chosenRating.value = null;
